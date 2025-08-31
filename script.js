@@ -14,6 +14,7 @@ document.getElementById("loginButton").addEventListener("click",function(e){
 
     if(mobileNumberValueConverted === mobileNumber && pinNumberValueConverted === pinNumber){
         window.location.href="./home.html"
+        // alert("You have successfully logged in to our Payoo app!");
     }
     else{
         alert("invalid credentials")

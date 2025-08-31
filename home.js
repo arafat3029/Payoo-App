@@ -1,4 +1,21 @@
+// function to toggle
+function handleToggle(id){
+    const forms = document.getElementsByClassName("form")
+
+    for(const form of forms){
+        form.style.display = "none"
+    }
+
+    document.getElementById(id).style.display ="block"
+}
+
+
+
+
 const validPin = 1234
+
+
+// add money
 document.getElementById("add-money-btn").addEventListener("click",function(e){
     e.preventDefault()
     const bank = document.getElementById("bank").value
@@ -20,10 +37,29 @@ document.getElementById("add-money-btn").addEventListener("click",function(e){
 
     document.getElementById("available-balance").innerText = toatalNewAvailableBalance
 })
-// Withdraw Money
+
+
+// Cashout Money
+const withdrawPinNumber = 1234
+
+
 document.getElementById("withdraw-btn").addEventListener("click", function(e){
     e.preventDefault()
-    console.log('Withdraw Money')
+
+    const amount = parseInt(document.getElementById("withdrae-amount").value)
+    const accountNumberWithdraw = document.getElementById("cash-out-withdraw-btn").value 
+    const withdrawPin = parseInt(document.getElementById("withdraw-pin").value)
+    if(accountNumberWithdraw.length<11){
+        alert("Invalid account Number");
+        return;
+    }
+    if(withdrawPin !== withdrawPinNumber){
+        alert("Invalid Pin Number")
+        return;
+    }
+    const availableBalance = parseInt(document.getElementById("available-balance").innerText)
+    const toatalNewAvailableBalance = availableBalance - amount
+    document.getElementById("available-balance").innerText = toatalNewAvailableBalance
 })
 
 
@@ -32,11 +68,18 @@ document.getElementById("withdraw-btn").addEventListener("click", function(e){
 
 // toggling feature 
 
-document.getElementById("add-button").addEventListener('click', function(){
-    document.getElementById("Cash-oute-parent").style.display = "none"
-    document.getElementById("add-money-parent").style.display = "block"
+document.getElementById("add-button").addEventListener('click', function(e){
+    handleToggle("add-money-parent")
+
+    const formBtns = document.getElementsByClassName("form-btn")
+    console.log(formBtns)
 })
 document.getElementById("cash-out-button").addEventListener('click', function(){
-    document.getElementById("add-money-parent").style.display = "none"
-    document.getElementById("Cash-oute-parent").style.display = "block"
+    handleToggle("Cash-oute-parent")
+})
+document.getElementById("transfer-button").addEventListener('click', function(){
+    handleToggle("transfer-money-parent")
+})
+document.getElementById("bonus-button").addEventListener('click', function(){
+    handleToggle("get-bonus-parent")
 })
